@@ -37,8 +37,13 @@ class User{
         session_destroy();
     }
 
+    public function delete(){
+        $this->bdd->query("DELETE FROM `utilisateurs` WHERE login = '".$_SESSION['login']."'");
+        session_destroy();
+    }
+
     public function update($login,$password,$email,$firstname,$lastname){
-        $this->bdd->query("UPDATE `utilisateurs` SET `login`='$login',`password`='$password',`email`='$email',`firstname`='$firstname',`lastname`='$lastname' WHERE 1");
+        $this->bdd->query("UPDATE `utilisateurs` SET `login`='$login',`password`='$password',`email`='$email',`firstname`='$firstname',`lastname`='$lastname' WHERE login = '".$_SESSION['login']."'");
     }
 
     public function isConnected(){
@@ -96,11 +101,12 @@ class User{
 $test = new User();
 //$test->register("test", "test", "test@gmail.com","test","test");
 $test->connect("test2", "test2");
-//$test->update("test2", "test2", "test2@gmail.com","test2","test2");
+//$test->delete();
+$test->update("test22", "test2", "test2@gmail.com","test2","test2");
 //$test->isConnected();
 //$test->getAllInfo();
-$test->getLogin();
-$test->getEmail();
-$test->getFirstName();
-$test->getLastName();
+//$test->getLogin();
+//$test->getEmail();
+//$test->getFirstName();
+//$test->getLastName();
 ?>
